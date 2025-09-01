@@ -25,6 +25,8 @@ class SignUpVM: ObservableObject{
     private var userNameValuePublisher: AnyPublisher<Bool, Never> {
         // Never = never sends an error in case of UI | Error = send an error in case of APIs
         return $userName
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main) // wait for typing to pause
+            .removeDuplicates()
             .map { !$0.isEmpty }   // $0 = the latest value of userName (likely a String)
             .eraseToAnyPublisher()
     }
