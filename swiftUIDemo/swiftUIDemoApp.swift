@@ -23,10 +23,14 @@ struct swiftUIDemoApp: App {
         }
     }()
 
+    
+    var user = User(name: "test", luyckyNumber: 0)
+    
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-            SignUpView(viewModel: SignUpVM())
+//            SignUpView(viewModel: SignUpVM())
+            PropertyWraperView().environmentObject(user)
         }
         .modelContainer(sharedModelContainer)
     }
